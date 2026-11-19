@@ -1,0 +1,40 @@
+/* Vice Panels — dark neon editor. The preview canvas is the poster itself. */
+html, body { margin: 0; min-height: 100%; background: #0d0616; color: #f4eefc; font: 15px/1.45 system-ui, sans-serif; }
+.app { display: flex; gap: 28px; align-items: flex-start; justify-content: center; padding: 24px; box-sizing: border-box; }
+.controls { display: flex; flex-direction: column; gap: 16px; width: 320px; flex: none; }
+.controls h1 { margin: 0; font-size: 32px; letter-spacing: 0.5px; background: linear-gradient(90deg, #ff2d92, #ff7e3d 55%, #00dcff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.tagline { margin: 0; color: #b9a8cc; }
+.group { display: flex; flex-direction: column; gap: 10px; padding: 14px; border: 1px solid #2c1b44; border-radius: 12px; background: #170b26; }
+.group h2 { margin: 0; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; color: #ff8ac2; }
+.hint { margin: 0; color: #b9a8cc; font-size: 13px; }
+label { display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 13px; }
+label.file { cursor: pointer; }
+input[type=text], select { font: inherit; padding: 9px; border: 1px solid #453058; border-radius: 8px; background: #0d0616; color: #f4eefc; }
+input[type=file] { font: inherit; }
+input[type=range] { width: 100%; accent-color: #ff2d92; }
+button { font: inherit; font-weight: 700; padding: 10px 12px; border: 0; border-radius: 8px; background: #2c1b44; color: #f4eefc; cursor: pointer; }
+button:hover { background: #3a2360; }
+button.active { background: #ff2d92; color: #fff; }
+button.ghost { background: transparent; border: 1px solid #453058; }
+button.export { padding: 14px; font-size: 17px; background: linear-gradient(90deg, #ff2d92, #ff7e3d); color: #fff; }
+button.export:hover { filter: brightness(1.1); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips button { padding: 7px 10px; font-size: 13px; }
+.row { display: flex; gap: 10px; align-items: flex-end; }
+.row .grow { flex: 1; }
+.panel-label { margin: 0; font-weight: 700; color: #7df9ff; }
+#status { margin: 0; min-height: 1.4em; color: #b9a8cc; font-size: 13px; }
+.preview { flex: 1; display: flex; justify-content: center; min-width: 0; }
+#cover { width: min(72vh, 62vw); height: auto; max-height: 92vh; aspect-ratio: auto; box-shadow: 0 12px 44px rgba(0, 0, 0, 0.55), 0 0 0 1px #2c1b44; cursor: grab; touch-action: none; }
+#cover:active { cursor: grabbing; }
+/* Cover-only screenshots: hide the editor, fill the viewport with the poster. */
+body.shot-cover .controls { display: none; }
+body.shot-cover .app { padding: 0; gap: 0; }
+body.shot-cover .preview { display: block; }
+body.shot-cover #cover { width: 100vw; height: 100vh; max-height: none; object-fit: fill; box-shadow: none; }
+#selftest { position: fixed; left: 8px; bottom: 8px; margin: 0; padding: 8px; background: #000; color: #0f0; font: 14px monospace; }
+@media (max-width: 900px) {
+  .app { flex-direction: column; }
+  .controls { width: 100%; }
+  #cover { width: 100%; }
+}
