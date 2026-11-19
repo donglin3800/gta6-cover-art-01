@@ -55,9 +55,20 @@ function syncPanelControls() {
   const panel = state.panels[selectedPanel];
   document.getElementById('panelLabel').textContent = `Panel ${selectedPanel + 1} of ${LAYOUTS[state.layout].panels}`;
   const sel = document.getElementById('panelPhoto');
-  sel.innerHTML = '<option value="-1">No photo</option>' + photos
-    .map((p, i) => `<option value="${i}"${panel.photo === i ? ' selected' : ''}>${p.name}</option>`)
-    .join('');
+  // Build options with DOM APIs, not innerHTML: photo names come from user
+  // file names, and a crafted name must never parse as markup.
+  sel.replaceChildren();
+  const none = document.createElement('option');
+  none.value = '-1';
+  none.textContent = 'No photo';
+  sel.appendChild(none);
+  photos.forEach((p, i) => {
+    const o = document.createElement('option');
+    o.value = String(i);
+    o.textContent = p.name;
+    if (panel.photo === i) o.selected = true;
+    sel.appendChild(o);
+  });
   document.getElementById('zoom').value = panel.zoom;
   document.getElementById('zoomVal').textContent = `${Math.round(panel.zoom * 100)}%`;
   document.getElementById('panX').value = panel.ox;
